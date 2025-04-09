@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 class Fruits:
 
     def __init__(self):
@@ -31,6 +32,7 @@ class Fruits:
             self.print_highest_and_lowest(food)
 
     def clean_nutrients(self, column):
+
         def convert_value(value):
             value = str(value)
             if 'mg' in value:
@@ -50,28 +52,44 @@ class Fruits:
         return column
 
     def print_highest_and_lowest(self, df):
-                    for col in df.columns:
-                        if col != 'name':
-                            max_value = df[col].max()
-                            min_value = df[col].min()
+        print("-------Highest and Lowest Values (per 100g serving)-------\n")
+        for col in df.columns:
+            if col != 'name':
+                max_value = df[col].max()
+                min_value = df[col].min()
 
-                            max_names = df[df[col] == max_value]['name'].tolist()
-                            min_names = df[df[col] == min_value]['name'].tolist()
+                max_names = df[df[col] == max_value]['name'].tolist()
+                min_names = df[df[col] == min_value]['name'].tolist()
 
-                            if len(max_names) > 100:
-                                max_names_str = "many items"
-                            else:
-                                max_names_str = ', '.join(max_names[:-1]) + ' and ' + max_names[-1] if len(max_names) > 1 else max_names[0]
+                if len(max_names) > 20:
+                    max_names_str = max_names[0] + ", " + max_names[
+                        1] + ", " + max_names[2] + ", " + "and many items"
+                else:
+                    max_names_str = ', '.join(
+                        max_names[:-1]) + ' and ' + max_names[-1] if len(
+                            max_names) > 1 else max_names[0]
 
-                            if len(min_names) > 100:
-                                min_names_str = "many items"
-                            else:
-                                min_names_str = ', '.join(min_names[:-1]) + ' and ' + min_names[-1] if len(min_names) > 1 else min_names[0]
+                if len(min_names) > 20:
+                    min_names_str = min_names[0] + ", " + min_names[
+                        1] + ", " + min_names[2] + ", " + "and many items"
+                else:
+                    min_names_str = ', '.join(
+                        min_names[:-1]) + ' and ' + min_names[-1] if len(
+                            min_names) > 1 else min_names[0]
+                measurement = 'mg'
+                if col == 'calories':
+                    measurement = 'kcal'
+                if col == 'vitamin_d' or col == 'vitamin_a':
+                    measurement = 'IU'
 
-                            print(f"For {col}:")
-                            print(f"  Highest: {max_names_str} with {max_value}")
-                            print(f"  Lowest: {min_names_str} with {min_value}")
-                            print()
+                print(f"For {col}:")
+                print(
+                    f"  Highest: {max_names_str} with {max_value} {measurement}"
+                )
+                print(
+                    f"  Lowest: {min_names_str} with {min_value} {measurement}"
+                )
+                print()
 
 
 # Usage example

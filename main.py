@@ -2,6 +2,7 @@
 from scripts.fruits import Fruits
 from scripts.houses import Houses
 from scripts.anime import Anime
+from scripts.text import Text
 
 
 def main():
@@ -14,6 +15,8 @@ def main():
         HOU()
     elif x == '3':
         ANIME()
+    elif x == '4':
+        TEXT()
 
 
 def FRU():
@@ -29,6 +32,9 @@ def HOU():
 def ANIME():
     anime_obj = Anime()
 
+def TEXT():
+    text_obj = Text()
+
 
 def INTRO():
     print("WELCOME TO SCRIPTS")
@@ -37,6 +43,7 @@ def INTRO():
     print("1. Load nutrition data")
     print("2. Load Housing data")
     print("3. Load Anime")
+    print("4. Send text")
 
 
 if __name__ == "__main__":

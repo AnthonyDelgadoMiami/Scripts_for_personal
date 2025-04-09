@@ -60,6 +60,8 @@ class Anime:
 
   def check_syn_with_titles(self, syn, eng_titles):
     for i in eng_titles:
+      if syn is None:
+        return False
       if i in syn:
         return False
     return True
@@ -79,16 +81,21 @@ class Anime:
         eng_titles = self.eng_grab(data)
     print(syn)
     while True:
-      guess = input("Now guess the anime:")
+      guess = input("Now guess the anime: ")
       if guess == "" or guess == " ":
-        print("actually put something")
+        print("actually put something this time, don't be a dummy")
       else:
         break
     flag = False
     for i in eng_titles:
-      if guess in i:
+      if guess == i:
         print("You WIN!")
         flag = True
+        break
+      elif guess in i and (len(guess) > (len(i) // 6)):
+        print("CLOSE ENOUGH!")
+        flag = True
+        break
     if not flag:
       print("You didn't get it...")
     print("It was: " + eng_titles[0])
